@@ -1,0 +1,100 @@
+type Query {
+    WebkulPaymentCreditsystemConfig: WebkulPaymentCreditsystemConfig
+        @resolver(
+            class: "Orienteed\\GraphQl\\Model\\Resolver\\Query\\Webkul\\PaymentCreditsystemConfig"
+        )
+}
+
+type Mutation {
+    o_mpSaveCart(
+        cart_id: String! @doc(description: "Cart Id")
+        cart_name: String! @doc(description: "Cart Name")
+        description: String @doc(description: "Description")
+    ): Boolean
+        @resolver(
+            class: "Orienteed\\GraphQl\\Model\\Resolver\\Mutation\\SaveCart"
+        )
+        @doc(description: "Save Cart")
+
+    mpQuoteSubmit: Int
+        @resolver(
+            class: "Orienteed\\GraphQl\\Model\\Resolver\\Mutation\\MpQuoteSubmit"
+        )
+}
+
+type MpCartsOutput {
+    description: String
+    cart_total: Money
+        @resolver(class: "Orienteed\\GraphQl\\Model\\Resolver\\CartTotal")
+}
+
+type MpGetCartsOutput {
+    page_info: SearchResultPageInfo
+}
+
+type WebkulPaymentCreditsystemConfig {
+    getcurrentcode: String
+    remainingcredit: String
+    remainingcreditformatted: String
+    remainingcreditcurrentcurrency: String
+    leftincredit: String
+    currencysymbol: String
+    grand_total_formatted: String
+    grand_total: String
+}
+
+type StoreConfig {
+    bank_transfer: ExtraInfoBankTransferPayment
+        @resolver(
+            class: "Orienteed\\GraphQl\\Model\\Resolver\\Query\\ExtraInfoBankTransferPayment"
+        )
+}
+
+type ExtraInfoBankTransferPayment {
+    instructions: String
+}
+
+type Aggregation {
+    position: Int
+}
+
+type Customer {
+    mp_quote_id: Int
+        @resolver(class: "Orienteed\\GraphQl\\Model\\Resolver\\CustomerQuoteId")
+}
+
+type Quote {
+    discount: String
+        @resolver(class: "Orienteed\\GraphQl\\Model\\Resolver\\MpQuoteDiscount")
+}
+
+interface QuoteItemInterface {
+    discount: String
+        @resolver(
+            class: "Orienteed\\GraphQl\\Model\\Resolver\\MpQuoteItemDiscount"
+        )
+}
+
+input ProductAttributeSortInput
+    @doc(
+        description: "ProductAttributeSortInput specifies the attribute to use for sorting search results and indicates whether the results are sorted in ascending or descending order. It's possible to sort products using searchable attributes with enabled 'Use in Filter Options' option"
+    ) {
+    price: SortEnum @doc(description: "The price of the item.")
+}
+
+type CustomerOrder {
+    store_id: String
+}
+
+interface ProductInterface
+    @typeResolver(
+        class: "Magento\\CatalogGraphQl\\Model\\ProductInterfaceTypeResolverComposite"
+    )
+    @doc(
+        description: "The ProductInterface contains attributes that are common to all types of products. Note that descriptions may not be available for custom and EAV attributes."
+    ) {
+    orParentSku: String
+        @resolver(class: "Orienteed\\GraphQl\\Model\\Resolver\\OrParentSku")
+    orParentUrlKey: String
+        @resolver(class: "Orienteed\\GraphQl\\Model\\Resolver\\OrParentUrlKey")
+}

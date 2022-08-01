@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="orienteed_emails_general_noncustomer" label="Non Customer Email Form" file="noncustomer.html" type="html" module="Orientded_SendEmailsFromRegistrationForms" area="frontend" />
+    <template id="orienteed_emails_general_becustomer" label="Be Customer Email Form" file="becustomer.html" type="html" module="Orienteed_SendEmailsFromRegistrationForms" area="frontend" />
+</config>

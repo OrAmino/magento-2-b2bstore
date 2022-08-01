@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\StoreGraphQl\Model\Resolver\Store\StoreConfigDataProvider">
+        <arguments>
+            <argument name="extendedConfigData" xsi:type="array">
+                <item name="is_required_login" xsi:type="string">requiredlogin/general/enable</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- isAllowedGuestCheckout -->
+    <preference for="Magento\Checkout\Helper\Data" type="Orienteed\RequiredLogin\Plugin\Checkout\Helper\Data" />
+</config>

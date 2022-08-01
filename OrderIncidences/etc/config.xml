@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <orienteed_emails>
+            <general>
+                <template>orienteed_emails_general_template</template>
+                <orderind_subject>New order incidence</orderind_subject>
+            </general>
+        </orienteed_emails>
+    </default>
+</config>

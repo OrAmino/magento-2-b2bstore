@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="customer_agent" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Customer Agent</label>
+            <tab>orienteed</tab>
+            <resource>Orienteed_CustomerAgent::config_customeragent</resource>
+            <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General Configuration</label>
+                <field id="agent_role" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Customer Agent Role</label>
+                    <source_model>Orienteed\CustomerAgent\Model\Config\AdminRoles</source_model>
+                    <comment>If you change role then it will effect on customer data, you need to re-save the customer and agent role relation again.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,36 @@
+type Mutation
+{
+    orderIncidencesEmail (
+        input: OrderIncidencesEmailInput
+    ): EmailResponse @resolver(class: "Orienteed\\OrderIncidences\\Model\\Resolver\\EmailSent")
+}
+input OrderIncidencesEmailInput {
+    order_number: String!
+    name: String!
+    email: String! 
+    phone: String!
+    incidences: [IncidencesData]
+}
+
+input IncidencesData {
+    id: Int
+    reference: String
+    units: Int
+    description: String
+    images: [IncidencesImage]
+}
+
+type EmailResponse {
+    message: String,
+    status: Boolean
+}
+
+input IncidencesImage {
+    base64: String
+    lastModified: String
+    name: String 
+    size: String 
+    type: String
+    webkitRelativePath: String
+}
+

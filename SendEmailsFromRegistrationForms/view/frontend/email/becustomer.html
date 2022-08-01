@@ -1,0 +1,34 @@
+<!--@subject {{trans "Reset your Be customer accounts password"}} @-->
+<!--@vars {
+"var store.frontend_name":"Store Name",
+"var customer.name":"Customer Name",
+"var this.getUrl($redirect_url,'customer/account/createPassword/',[_query:[token:$rp_token],_nosid:1])":"Reset Password URL",
+"var rp_token":"Token",
+"var name":"Customer Name",
+"var client_number":"Client Number",
+"var nif":"Vat Id",
+"var redirect_url":"Redirect Url",
+} @-->
+{{template config_path="design/email/header_template"}}
+<p class="greeting">{{trans "%name," name=$name}}</p>
+<p>{{trans "There was recently a request to change the password for your account."}}</p>
+<p>{{trans "If you requested this change, set a new password here:"}}</p>
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center">
+                        <a href="{{var redirect_url}}" target="_blank">{{trans "Set a New Password"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<p class="greeting">{{trans "Client Number : %name" name=$no_of_client}}</p>
+<p class="greeting">{{trans "Vat Id : %nif" nif=$nif}}</p>
+<p>{{trans "If you did not make this request, you can ignore this email and your password will remain the same."}}</p>
+
+{{template config_path="design/email/footer_template"}}

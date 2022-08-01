@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <orienteed_emails>
+            <general>
+                <noncustomer>orienteed_emails_general_noncustomer</noncustomer>
+                <becustomer>orienteed_emails_general_becustomer</becustomer>
+                <redirecturl>http://10.0.8.134:10000/</redirecturl>
+            </general>
+        </orienteed_emails>
+    </default>
+</config>

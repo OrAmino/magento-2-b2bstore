@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_RequestForQuote
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+use Mageplaza\RequestForQuote\Block\Adminhtml\Requests\Items;
+
+/** @var Items $block */
+?>
+<?php $helperData      = $block->getHelperData(); ?>
+<?php $items           = $block->getAllItems(); ?>
+<?php $currencyCode    = $block->getQuoteCurrencyCode() ?: $block->getBaseCurrencyCode(); ?>
+<?php $orienteedHelper = $this->helper(Orienteed\CustomerAgent\Helper\Data::class); ?>
+<table class="data-table admin__table-primary order-tables" style="border: 1px solid #CCC">
+    <thead>
+        <tr class="headings">
+            <th class="col name"><?= $block->escapeHtml(__('Product Name')); ?></th>
+            <th class="col-price"><?= $block->escapeHtml(__('Original Price')); ?></th>
+            <th class="col quote-price"><?= $block->escapeHtml(__('Quote Price (Excl. Tax)')); ?></th>
+            <th class="col qty"><?= $block->escapeHtml(__('Qty')); ?></th>
+            <th class="col subtotal"><?= $block->escapeHtml(__('Subtotal')); ?></th>
+            <th class="col subtotal"><?= $block->escapeHtml(__('Action')); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($items as $item) : ?>
+            <tr id="order-item-row-<?= $item->getId(); ?>" style="border-bottom: 1px solid #e2e2e2">
+                <td class="col name">
+                    <span class="product name product-item-name"><?= $block->escapeHtml($item->getName()) ?></span>
+                </td>
+                <td class="col origin-price">
+                    <?php $product = $orienteedHelper->getProductBySku($item->getSku(), $item->getStoreId()); ?>
+                    <?php $productPrice = $helperData->formatPrice($product->getFinalPrice(), false, null, null, $currencyCode); ?>
+                    <?php if ($discountPrice = $orienteedHelper->getPriceAfterDiscount($product, $block->getQuoteCart()->getCustomerGroupId())) : ?>
+                        <?php if ($discountPrice > 0) : ?>
+                            <?php $productPrice = $helperData->formatPrice($discountPrice, false, 1, null, $currencyCode); ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?= $productPrice; ?>
+                </td>
+                <td class="col quote-price" data-th="<?= $block->escapeHtml(__('Price')); ?>">
+                    <input class="input-text qty mrfq-request-price" id="quote_price-<?= $item->getId(); ?>" name="quote_item[<?= $item->getId() ?>][quote_price]" title="<?= $block->escapeHtml(__('Quote Price')); ?>" value="<?= $item->getRequestPrice(); ?>" />
+                </td>
+                <td class="col qty" data-th="<?= $block->escapeHtml(__('Qty')); ?>" style="width: 10%">
+                    <input id="quote-qty-<?= $item->getId() ?>-qty" name="quote_item[<?= $item->getId() ?>][qty]" value="<?= (int)$item->getQty(); ?>" title="<?= $block->escapeHtml(__('Qty')); ?>" maxlength="12" class="input-text qty mrfq-qty" data-validate="{required:true,'validate-number':true,'validate-greater-than-zero':true}" />
+                </td>
+                <td class="col subtotal" data-th="<?= $block->escapeHtml(__('Subtotal')) ?>">
+                    <?= $helperData->formatPrice($item->getRowTotal(), false, null, null, $currencyCode); ?>
+                </td>
+                <td class="col actions">
+                    <a href="<?= $block->getRemoveItemUrl($item->getId()); ?>" class="action mrfq-delete">
+                        <span><?= $block->escapeHtml(__('Delete')); ?></span>
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+    <tfoot>
+        <tr class="col">
+            <td class="label"></td>
+            <td class="label"></td>
+            <td class="label"></td>
+            <td class="label"></td>
+            <td class="label">
+                <strong><?= $block->escapeHtml(__('Quote Total')); ?></strong>
+            </td>
+            <td>
+                <strong><?= $helperData->formatPrice($block->getQuoteCart()->getSubtotal(), false, null, null, $currencyCode); ?></strong>
+            </td>
+        </tr>
+    </tfoot>
+</table>

@@ -1,0 +1,34 @@
+type Mutation {
+  beCustomerSendMail(
+    email: String!
+    nif: String!
+    no_of_client: Int!
+  ): messageResult
+    @resolver(
+      class: "\\Orienteed\\SendEmailsFromRegistrationForms\\Model\\Resolver\\BeCustomerSendMail"
+    )
+    @doc(description: "Send mail to be customer")
+
+  nonCustomerSendMail(
+    email: String!
+    name: String!,
+    nif: String!,
+    address1: String!,
+    address2: String!,
+    postal_code: String!,
+    population: Int!,
+    province: String!,
+    country: String!,
+    contact_name: String!,
+    phone_number: String!,
+  ): messageResult
+    @resolver(
+      class: "\\Orienteed\\SendEmailsFromRegistrationForms\\Model\\Resolver\\NonCustomerSendMail"
+    )
+    @doc(description: "Send mail to non customer")
+}
+
+type messageResult {
+  message: String @doc(description: "Result Success Message")
+  error: Boolean @doc(description: "Result Error Message")
+}

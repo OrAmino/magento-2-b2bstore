@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="orienteed_emails" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Order Incidences</label>
+            <tab>orienteed</tab>
+            <resource>Orienteed_OrderIncidences::orienteed</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="template" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Incidences Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment>Email template is chosen based on theme fallback when "Default" option is selected.</comment>
+                </field>
+                <field id="orderind_subject" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Incidences Email Subject</label>
+                    <comment>This is the subject or title when email being sent for the Order Incidences.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

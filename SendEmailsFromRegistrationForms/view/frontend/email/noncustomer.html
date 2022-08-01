@@ -1,0 +1,94 @@
+<!--@subject {{trans "Mail from non customer"}} @-->
+{{template config_path="design/email/header_template"}}
+<table class="email-intro" style="border: 1px solid black;margin: 0 auto;">
+    <tr style="text-align: center;">
+        <td>
+            Email
+        </td>
+        <td>
+            {{var email}}
+        </td>
+    </tr>
+    <tr style="text-align: center;">
+        <td>
+            Name
+        </td>
+        <td>
+            {{var name}}
+        </td>
+    </tr>
+    <tr style="text-align: center;">
+        <td>
+            NIF
+        </td>
+        <td>
+            {{var nif}}
+        </td>
+    </tr>
+    <tr style="text-align: center;">
+        <td>
+            Address 1
+        </td>
+        <td>
+            {{var address1}}
+        </td>
+    </tr>
+    <tr style="text-align: center;">
+        <td>
+            Address 2
+        </td>
+        <td>
+            {{var address2}}
+        </td>
+    </tr>
+    <tr style="text-align: center;">
+        <td>
+            Postal Code
+        </td>
+        <td>
+            {{var postal_code}}
+        </td>
+    </tr>
+    <tr style="text-align: center;">
+        <td>
+            Population
+        </td>
+        <td>
+            {{var population}}
+        </td>
+    </tr>
+    <tr style="text-align: center;">
+        <td>
+            Province
+        </td>
+        <td>
+            {{var province}}
+        </td>
+    </tr>
+    <tr style="text-align: center;">
+        <td>
+            Country
+        </td>
+        <td>
+            {{var country}}
+        </td>
+    </tr>
+    <tr style="text-align: center;">
+        <td>
+            Contact Name
+        </td>
+        <td>
+            {{var contact_name}}
+        </td>
+    </tr>
+    <tr style="text-align: center;">
+        <td>
+            Phone
+        </td>
+        <td>
+            {{var phone_number}}
+        </td>
+    </tr>
+
+</table>
+{{template config_path="design/email/footer_template"}}

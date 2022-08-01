@@ -1,0 +1,26 @@
+type Mutation {
+  customAttributeQuoteSave(
+    masked_id: String!
+    comment: String
+    external_order_number: String
+  ): SuccessMessage
+    @resolver(
+      class: "Orienteed\\OrderAttribute\\Model\\Resolver\\CustomAttributeQuoteSave"
+    )
+    @doc(description: "This will save the provided values to the quote table.")
+}
+
+type SuccessMessage {
+  message: String @doc(description: "Result Success Message")
+  status: String @doc(description: "Result Status")
+}
+
+type Cart {
+  comment: String @resolver(class: "\\Orienteed\\OrderAttribute\\Model\\Resolver\\CartComment")
+  external_order_number: String @resolver(class: "\\Orienteed\\OrderAttribute\\Model\\Resolver\\CartExternalOrderNumber")
+}
+
+type CustomerOrders {
+  comment: String @resolver(class: "\\Orienteed\\OrderAttribute\\Model\\Resolver\\OrderComment")
+  external_order_number: String @resolver(class: "\\Orienteed\\OrderAttribute\\Model\\Resolver\\ExternalOrderNumberOrder")
+}

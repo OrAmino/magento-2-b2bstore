@@ -1,0 +1,3 @@
+type StoreConfig {
+    is_required_login: String @doc(description: "customer mobile number")
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config>
+    <type name="Mageplaza\RequestForQuote\Helper\Data">
+        <plugin name="Orienteed_All_DataPlugin" type="Orienteed\All\Plugin\DataPlugin" sortOrder="1" disabled="false" />
+    </type>
+</config>

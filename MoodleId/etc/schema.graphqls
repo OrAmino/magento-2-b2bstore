@@ -1,0 +1,10 @@
+input CustomerInput {
+  moodle_id: String
+}
+
+type Customer {
+  moodle_id: String
+    @resolver(
+      class: "\\Orienteed\\MoodleId\\Model\\Resolver\\MoodleIdAttribute"
+    )
+}

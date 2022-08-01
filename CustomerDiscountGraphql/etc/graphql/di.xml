@@ -1,0 +1,5 @@
+<config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd'>
+    <type name='Magento\CatalogGraphQl\Model\Resolver\Products'>
+        <plugin name='CustomerDiscountGraphql_Resolver_ProductsPlugin' type='Orienteed\CustomerDiscountGraphql\Plugin\Resolver\ProductsPlugin' sortOrder='10' disabled='false'  />
+    </type>
+</config>

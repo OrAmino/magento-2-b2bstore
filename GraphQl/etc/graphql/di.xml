@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\GraphQl\Controller\HttpRequestProcessor">
+        <arguments>
+            <argument name="requestValidators" xsi:type="array">
+                <item name="AuthTokenValidator" xsi:type="object">Orienteed\GraphQl\Controller\HttpRequestValidator\AuthTokenValidator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mageplaza\SaveCartGraphQl\Model\Resolver\Query\GetCarts">
+        <plugin name="Orienteed_GraphQl::afterResolve" type="Orienteed\GraphQl\Model\Resolver\Query\GetCarts" sortOrder="20"/>
+    </type>
+    <preference for="Mageplaza\SaveCartGraphQl\Model\Resolver\Mutation\RestoreCart" type="Orienteed\GraphQl\Model\Resolver\Mutation\RestoreCart" />
+    <preference for="Mageplaza\SaveCart\Model\Api\SaveCartRepository" type="Orienteed\GraphQl\Plugin\Api\SaveCartRepository" />
+    <preference for="Mageplaza\SaveCartGraphQl\Model\Resolver\Query\GetCarts" type="Orienteed\GraphQl\Plugin\Model\Resolver\Query\GetCarts" />
+    <!-- Reason : Webkul CustomerCreditSystem payment method -->
+    <preference for="Magento\QuoteGraphQl\Model\Resolver\AvailablePaymentMethods" type="Orienteed\GraphQl\Plugin\Model\Resolver\AvailablePaymentMethods" />
+    <!-- Add Position into Aggregations -->
+    <preference for="Magento\CatalogGraphQl\Model\Resolver\Aggregations" type="Orienteed\GraphQl\Plugin\Model\Resolver\Aggregations" />
+    <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\AttributeOptionProvider" type="Orienteed\GraphQl\Plugin\DataProvider\Product\LayeredNavigation\AttributeOptionProvider" />
+    <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Builder\Attribute" type="Orienteed\GraphQl\Plugin\DataProvider\Product\LayeredNavigation\Builder\Attribute" />
+    <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Builder\Price" type="Orienteed\GraphQl\Plugin\DataProvider\Product\LayeredNavigation\Builder\Price" />
+    <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Formatter\LayerFormatter" type="Orienteed\GraphQl\Plugin\DataProvider\Product\LayeredNavigation\Formatter\LayerFormatter" />
+    <!-- Config Product not add into quote issue -->
+    <preference for="Mageplaza\RequestForQuoteGraphQl\Model\Resolver\AddSimpleProductsToQuote" type="Orienteed\GraphQl\Plugin\Model\Resolver\AddSimpleProductsToQuote" />
+    <!-- Get Quote List have not sort order issue -->
+    <preference for="Mageplaza\RequestForQuoteGraphQl\Model\Resolver\GetList" type="Orienteed\GraphQl\Plugin\Model\Resolver\GetList" />
+    <!-- Update Quote List have not sort order issue -->
+    <preference for="Mageplaza\RequestForQuoteGraphQl\Model\Resolver\Update" type="Orienteed\GraphQl\Plugin\Model\Resolver\Update" />
+    <!-- Webkul check customer id from session that's we create plugin-->
+    <type name="Webkul\CustomerCreditSystem\Helper\Data">
+        <plugin name="Orienteed_GraphQl::WebkulCustomerCreditSystemHelperData" type="Orienteed\GraphQl\Plugin\Helper\Data" sortOrder="20"/>
+    </type>
+    <!-- Remove store filter from customer order history -->
+    <preference for="Magento\SalesGraphQl\Model\Resolver\CustomerOrders\Query\OrderFilter" type="Orienteed\GraphQl\Plugin\SalesGraphQl\Model\Resolver\CustomerOrders\Query\OrderFilter" />
+    <!-- Add store_id into graphql format of sales order -->
+    <preference for="Magento\SalesGraphQl\Model\Formatter\Order" type="Orienteed\GraphQl\Plugin\SalesGraphQl\Model\Formatter\Order" />
+</config>

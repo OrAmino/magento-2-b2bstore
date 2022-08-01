@@ -1,0 +1,82 @@
+<div class="use-info">
+    <table class="email-items-test" style="width:100%">
+        <tbody>
+            <tr class="user-name">
+                <td><?= __('Name'); ?></td>
+                <td><?= $block->getName(); ?></td>
+            </tr>
+            <tr class="user-email">
+                <td><?= __('Email'); ?></td>
+                <td><?= $block->getEmail(); ?></td>
+            </tr>
+            <tr class="user-contect">
+                <td><?= __('Phone'); ?></td>
+                <td><?= $block->getPhone(); ?></td>
+            </tr>
+            <tr class="user-contect">
+                <td><?= __('Order Number'); ?></td>
+                <td><?= $block->getOrderNumber(); ?></td>
+            </tr>
+            <tr class="user-contect" style="text-align:left">
+                <td colspan="2" style="padding:15px 0;"><strong><?= __('Incidence'); ?></strong></td>
+            </tr>
+            <?php if (count($block->getIncidences())) : ?>
+                <tr class="order-incidences">
+                    <td colspan="2">
+                        <table border=" 1px" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th class="col description" scope="col"><span><?= $block->escapeHtml(__('Description')); ?></span></th>
+                                    <th class="col reference" scope="col"><span><?= $block->escapeHtml(__('Reference')); ?></span></th>
+                                    <th class="col units" scope="col"><span><?= $block->escapeHtml(__('Units')); ?></span></th>
+                                    <th class="col images" scope="col"><span><?= $block->escapeHtml(__('Image Name (As per attachment)')); ?></span></th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($block->getIncidences() as $incidences) : ?>
+                                <?php $basePath = BP . '/pub/media/order/incidences/'; ?>
+                                <?php $storeUrl = $this->helper('Orienteed\OrderIncidences\Helper\Email')->getStoreUrl(); ?>
+                                <?php if (!file_exists($basePath)) : ?>
+                                    <?php mkdir($basePath, 0777, true); ?>
+                                <?php endif; ?>
+                                <tbody>
+                                    <tr class="user-contect">
+                                        <?php if (isset($incidences['description'])) : ?>
+                                            <td><?= $incidences['description']; ?></td>
+                                        <?php else : ?>
+                                            <td></td>
+                                        <?php endif; ?>
+                                        <?php if (isset($incidences['reference'])) : ?>
+                                            <td><?= $incidences['reference']; ?></td>
+                                        <?php else : ?>
+                                            <td></td>
+                                        <?php endif; ?>
+                                        <?php if (isset($incidences['units'])) : ?>
+                                            <td><?= $incidences['units']; ?></td>
+                                        <?php else : ?>
+                                            <td></td>
+                                        <?php endif; ?>
+                                        <?php if (isset($incidences['images']) && count($incidences['images']) > 0) : ?>
+                                            <td>
+                                                <?php foreach ($incidences['images'] as $img) : ?>
+                                                    <?php $baseurlPath = $storeUrl . 'media/order/incidences/' . $img['name']; ?>
+                                                    <?php /* ?><td><img src="<?= $baseurlPath; ?>" alt="<?= $img['name']; ?>" class="image" /></td><?php */ ?>
+                                                    <?php if (count($incidences['images'])  == 1) : ?>
+                                                        <span class="image"><?= $img['name']; ?></span>
+                                                    <?php else : ?>
+                                                        <span class="image"><?= $img['name']; ?></span>
+                                                        <br />
+                                                    <?php endif; ?>
+
+                                                <?php endforeach; ?>
+                                            </td>
+                                        <?php endif; ?>
+                                    </tr>
+                                </tbody>
+                            <?php endforeach; ?>
+                        </table>
+                    </td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
